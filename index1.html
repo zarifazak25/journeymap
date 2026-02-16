@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey Maps</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      background: #0e0e12;
+      color: #f0ede6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(99,72,255,0.12), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(255,136,72,0.08), transparent);
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4em;
+      background: linear-gradient(135deg, #f0ede6 0%, #c8b89a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      font-size: 1.05rem;
+      color: #8a8694;
+      margin-bottom: 3rem;
+    }
+
+    .cards {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      width: 300px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 2.4rem 2rem;
+      text-decoration: none;
+      color: #f0ede6;
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(99,72,255,0.08), rgba(255,136,72,0.06));
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      opacity: 0.12;
+      position: absolute;
+      top: 16px;
+      right: 24px;
+    }
+
+    .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #8a8694;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-top: 1.4rem;
+      font-size: 0.85rem;
+      color: #9b8aff;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .arrow { transform: translateX(6px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { animation: fadeUp 0.7s ease-out; }
+    p.subtitle { animation: fadeUp 0.7s ease-out 0.1s both; }
+    .card:nth-child(1) { animation: fadeUp 0.6s ease-out 0.2s both; }
+    .card:nth-child(2) { animation: fadeUp 0.6s ease-out 0.3s both; }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="content">
+    <h1>Journey Maps</h1>
+    <p class="subtitle">Select a journey map to explore</p>
+    <div class="cards">
+      <a class="card" href="journeymap1.html">
+        <span class="card-number">01</span>
+        <div class="card-title">Journey Map 1</div>
+        <div class="card-desc">View the first journey map experience.</div>
+        <span class="arrow">Explore →</span>
+      </a>
+      <a class="card" href="journeymap2.html">
+        <span class="card-number">02</span>
+        <div class="card-title">Journey Map 2</div>
+        <div class="card-desc">View the second journey map experience.</div>
+        <span class="arrow">Explore →</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
