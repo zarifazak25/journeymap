@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Map Example: Canva for Education — Teacher Creating a Lesson Slide Deck</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f9fa;
+    color: #2d3436;
+    padding: 40px;
+  }
+
+  .journey-map {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* ===== HEADER / CONTEXT ===== */
+  .header {
+    background: #1a1a2e;
+    color: white;
+    padding: 32px 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #7B68EE;
+  }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: #8888aa;
+    margin-bottom: 16px;
+  }
+
+  .header .map-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .context-row {
+    display: flex;
+    gap: 24px;
+  }
+
+  .context-box {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .context-box h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #7B68EE;
+    margin-bottom: 8px;
+  }
+
+  .context-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c0c0d8;
+  }
+
+  .persona-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .persona-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #7B68EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .persona-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .persona-info p {
+    font-size: 12px;
+    color: #8888aa;
+    line-height: 1.4;
+  }
+
+  /* ===== GRAVEYARD ===== */
+  .graveyard {
+    background: #f0f0f0;
+    border-left: 4px solid #e17055;
+    margin: 0 40px;
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .graveyard h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #e17055;
+    margin-bottom: 8px;
+  }
+
+  .graveyard ul {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .graveyard li {
+    font-size: 12px;
+    color: #636e72;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: line-through;
+    border: 1px solid #dfe6e9;
+  }
+
+  /* ===== SECTION DIVIDERS ===== */
+  .section-divider {
+    margin: 0 40px;
+    padding: 20px 0 8px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #7B68EE;
+    font-weight: 700;
+    border-top: 2px solid #7B68EE;
+    margin-top: 24px;
+  }
+
+  /* ===== PHASES BAR ===== */
+  .phases-bar {
+    display: grid;
+    grid-template-columns: 160px repeat(5, 1fr);
+    margin: 24px 40px 0;
+  }
+
+  .phase-label-header {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #636e72;
+    padding: 12px 0;
+    font-weight: 600;
+  }
+
+  .phase-item {
+    text-align: center;
+    padding: 12px 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .phase-sub {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.85;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .p1 { background: #6c5ce7; }
+  .p2 { background: #0984e3; }
+  .p3 { background: #00b894; }
+  .p4 { background: #e17055; }
+  .p5 { background: #fdcb6e; color: #2d3436; }
+
+  /* ===== EXPERIENCE GRID ===== */
+  .experience-grid { margin: 0 40px; }
+
+  .grid-row {
+    display: grid;
+    grid-template-columns: 160px repeat(5, 1fr);
+    border-bottom: 1px solid #eee;
+    min-height: 80px;
+  }
+
+  .row-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    padding: 16px 8px 16px 0;
+    display: flex;
+    align-items: flex-start;
+    border-right: 2px solid #dfe6e9;
+  }
+
+  .row-label .label-icon { margin-right: 8px; font-size: 16px; }
+
+  .cell {
+    padding: 12px 14px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #2d3436;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .cell:last-child { border-right: none; }
+  .cell ul { list-style: none; padding: 0; }
+
+  .cell li {
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .cell li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #b2bec3;
+  }
+
+  .quote {
+    font-style: italic;
+    color: #6c5ce7;
+  }
+
+  .quote::before { content: '\201C'; }
+  .quote::after { content: '\201D'; }
+
+  /* ===== TOUCHPOINTS ===== */
+  .touchpoint-icons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .touchpoint-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background: #dfe6e9;
+    position: relative;
+  }
+
+  .touchpoint-icon .tp-label {
+    position: absolute;
+    bottom: -16px;
+    font-size: 9px;
+    white-space: nowrap;
+    color: #636e72;
+  }
+
+  /* ===== EMOTION CURVE ===== */
+  .emotion-section {
+    margin: 0 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .emotion-curve-container {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+  }
+
+  .emotion-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 12px;
+    font-size: 10px;
+    color: #b2bec3;
+    height: 180px;
+    text-align: right;
+  }
+
+  .emotion-chart {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(to bottom,
+      rgba(0, 184, 148, 0.05) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(225, 112, 85, 0.05) 100%
+    );
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .emotion-chart svg { width: 100%; height: 100%; }
+
+  .midline {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed #dfe6e9;
+  }
+
+  .emotion-point {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .emotion-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .emotion-annotation {
+    position: absolute;
+    font-size: 10px;
+    color: #636e72;
+    font-style: italic;
+    max-width: 120px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* ===== ANALYSIS ===== */
+  .analysis-section { margin: 24px 40px; }
+
+  .analysis-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    margin-bottom: 16px;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .analysis-card {
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .card-strength { background: #d4edda; border-left: 3px solid #00b894; }
+  .card-pain { background: #f8d7da; border-left: 3px solid #e17055; }
+  .card-opportunity { background: #d1ecf1; border-left: 3px solid #0984e3; }
+  .card-question { background: #fff3cd; border-left: 3px solid #fdcb6e; }
+
+  .analysis-card .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .card-strength .card-tag { color: #00b894; }
+  .card-pain .card-tag { color: #e17055; }
+  .card-opportunity .card-tag { color: #0984e3; }
+  .card-question .card-tag { color: #d4a017; }
+
+  .phase-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.06);
+    color: #636e72;
+    margin-top: 6px;
+  }
+
+  /* ===== LEGEND ===== */
+  .legend {
+    margin: 24px 40px 32px;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .legend h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #636e72;
+  }
+
+  .legend-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .map-footer {
+    background: #f8f9fa;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #b2bec3;
+    border-top: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+
+<div class="journey-map">
+
+  <!-- ==================== SECTION 1: CONTEXT ==================== -->
+  <div class="header">
+    <div>
+      <h1>Learner Journey Map</h1>
+      <div class="subtitle">EDUC 590 — UX Research in Education | Example: Teacher-Facing Tool</div>
+      <div class="map-title">First-Year Teacher Creating a Science Lesson Slide Deck on Canva for Education</div>
+
+      <div class="context-row">
+        <div class="context-box">
+          <div class="persona-card">
+            <div class="persona-avatar">👩‍🏫</div>
+            <div class="persona-info">
+              <h4>Ms. Tran</h4>
+              <p>1st-year 5th grade science teacher<br>
+              Comfortable with Google Slides, new to Canva<br>
+              School recently adopted Canva for Education<br>
+              Needs to create visually engaging lessons to keep students focused</p>
+            </div>
+          </div>
+        </div>
+        <div class="context-box">
+          <h3>Scenario</h3>
+          <p>Ms. Tran's school has adopted Canva for Education. She needs to create an engaging slide deck for a 5th grade lesson on the water cycle. She wants to use Canva's education templates and share the finished deck with students through Google Classroom, all within her 50-minute planning period.</p>
+        </div>
+        <div class="context-box">
+          <h3>User Goals & Expectations</h3>
+          <p>
+            • Find a science-specific template quickly<br>
+            • Customize it for her water cycle lesson in under 30 min<br>
+            • Make it visually appealing without design skills<br>
+            • Share directly to Google Classroom<br>
+            • Reuse or adapt it for future lessons
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVISED ASSUMPTIONS -->
+  <div class="graveyard">
+    <h3>🪦 Revised Assumptions</h3>
+    <ul>
+      <li>Education templates would be organized by subject and grade</li>
+      <li>Google Classroom integration would be one-click</li>
+      <li>All template elements would be fully editable</li>
+      <li>The "Magic Design" AI would understand educational content needs</li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 2: THE EXPERIENCE ==================== -->
+  <div class="section-divider">Section 2: The Experience</div>
+
+  <div class="phases-bar">
+    <div class="phase-label-header">Stages</div>
+    <div class="phase-item p1">Get Started<span class="phase-sub">Account & orientation</span></div>
+    <div class="phase-item p2">Find a Template<span class="phase-sub">Searching & browsing</span></div>
+    <div class="phase-item p3">Customize<span class="phase-sub">Editing & creating</span></div>
+    <div class="phase-item p4">Share<span class="phase-sub">Distribute to students</span></div>
+    <div class="phase-item p5">Reflect<span class="phase-sub">Was it worth it?</span></div>
+  </div>
+
+  <div class="experience-grid">
+
+    <!-- ACTIONS ROW -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">🏃</span> Actions</div>
+      <div class="cell">
+        <ul>
+          <li>Logs in with school Google account (SSO)</li>
+          <li>Lands on Canva for Education dashboard</li>
+          <li>Sees onboarding tooltip tour (3 steps)</li>
+          <li>Dismisses tips to get started quickly</li>
+          <li>Notices "For You" recommendations on homepage</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li>Types "water cycle" in search bar</li>
+          <li>Gets 200+ results — presentations, worksheets, posters, infographics mixed together</li>
+          <li>Filters by "Presentations"</li>
+          <li>Scrolls through 40+ presentation templates</li>
+          <li>Clicks into 3 templates to preview</li>
+          <li>Selects one that looks close enough</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li>Opens template editor</li>
+          <li>Replaces placeholder text with lesson content</li>
+          <li>Tries to move a diagram — it's a grouped element she can't easily ungroup</li>
+          <li>Searches for "water cycle diagram" in Elements panel</li>
+          <li>Drags in new graphics, resizes and repositions</li>
+          <li>Adds 3 new slides for class discussion prompts</li>
+          <li>Tries "Magic Design" — results aren't relevant to science</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li>Clicks "Share" button</li>
+          <li>Looks for Google Classroom integration</li>
+          <li>Finds it under "More" → "Google Classroom"</li>
+          <li>Connects her Classroom account (first-time authorization)</li>
+          <li>Selects class and posts as material</li>
+          <li>Also downloads as PDF backup</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li>Checks how it looks in student view</li>
+          <li>Notes that some fonts rendered differently</li>
+          <li>Makes a mental note of what to do differently next time</li>
+          <li>Considers creating a template from this deck for future lessons</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- THOUGHTS ROW -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">💭</span> Thoughts</div>
+      <div class="cell">
+        <ul>
+          <li><span class="quote">Oh good, SSO works — no new password to remember</span></li>
+          <li><span class="quote">This looks a lot more polished than Google Slides</span></li>
+          <li><span class="quote">I don't have time for a tutorial right now</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="quote">200 results? I just need a simple science presentation</span></li>
+          <li><span class="quote">Why are worksheets and posters mixed in with slides?</span></li>
+          <li><span class="quote">These templates are beautiful but most are for marketing, not education</span></li>
+          <li><span class="quote">This one is close enough — I'll just modify it</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="quote">Why can't I edit this diagram? Everything is locked together</span></li>
+          <li><span class="quote">The Elements panel has great graphics but finding science-specific ones takes forever</span></li>
+          <li><span class="quote">Magic Design gave me a business pitch deck — not helpful</span></li>
+          <li><span class="quote">This is taking longer than Google Slides would have</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="quote">Where is Google Classroom? It's not on the main share screen</span></li>
+          <li><span class="quote">OAuth authorization for Classroom — one more step</span></li>
+          <li><span class="quote">Okay, it posted. But students see a Canva link, not an embedded preview</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="quote">The slides looked different on the student's Chromebook — fonts changed</span></li>
+          <li><span class="quote">This took my whole planning period — but it does look better than my usual slides</span></li>
+          <li><span class="quote">If I save this as my own template, next time will be faster</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TOUCHPOINTS ROW -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">📱</span> Touchpoints</div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">🔑<span class="tp-label">SSO</span></div>
+          <div class="touchpoint-icon">🏠<span class="tp-label">Dashboard</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">🔍<span class="tp-label">Search</span></div>
+          <div class="touchpoint-icon">🗂️<span class="tp-label">Filters</span></div>
+          <div class="touchpoint-icon">👁️<span class="tp-label">Preview</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">✏️<span class="tp-label">Editor</span></div>
+          <div class="touchpoint-icon">🖼️<span class="tp-label">Elements</span></div>
+          <div class="touchpoint-icon">🤖<span class="tp-label">Magic AI</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">🔗<span class="tp-label">Share</span></div>
+          <div class="touchpoint-icon">📚<span class="tp-label">Classroom</span></div>
+          <div class="touchpoint-icon">📄<span class="tp-label">PDF</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">👀<span class="tp-label">Student view</span></div>
+          <div class="touchpoint-icon">💾<span class="tp-label">Template</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMOTION CURVE -->
+  <div class="emotion-section">
+    <div class="emotion-curve-container">
+      <div class="emotion-y-axis">
+        <span>😊 Positive</span>
+        <span>😐 Neutral</span>
+        <span>😟 Negative</span>
+      </div>
+      <div class="emotion-chart">
+        <div class="midline"></div>
+        <svg viewBox="0 0 1000 180" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6c5ce7;stop-opacity:0.12" />
+              <stop offset="50%" style="stop-color:#e17055;stop-opacity:0.12" />
+              <stop offset="100%" style="stop-color:#fdcb6e;stop-opacity:0.12" />
+            </linearGradient>
+          </defs>
+          <path d="M 40,55 C 100,50 140,40 200,35 C 260,45 300,65 380,80 C 440,90 480,105 540,115 C 600,120 640,110 700,95 C 760,85 800,75 860,65 C 920,60 960,55 980,58"
+                fill="url(#cGrad)" />
+          <path d="M 40,55 C 100,50 140,40 200,35 C 260,45 300,65 380,80 C 440,90 480,105 540,115 C 600,120 640,110 700,95 C 760,85 800,75 860,65 C 920,60 960,55 980,58"
+                fill="none" stroke="#636e72" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+
+        <div class="emotion-point" style="left: 8%; top: 30%;">
+          <div class="emotion-dot" style="background: #6c5ce7;">😊</div>
+          <div class="emotion-annotation" style="top: 36px;">SSO is smooth</div>
+        </div>
+        <div class="emotion-point" style="left: 20%; top: 20%;">
+          <div class="emotion-dot" style="background: #6c5ce7;">😃</div>
+          <div class="emotion-annotation" style="top: 36px;">Looks professional!</div>
+        </div>
+        <div class="emotion-point" style="left: 32%; top: 37%;">
+          <div class="emotion-dot" style="background: #0984e3;">😐</div>
+          <div class="emotion-annotation" style="top: 36px;">Too many results</div>
+        </div>
+        <div class="emotion-point" style="left: 45%; top: 50%;">
+          <div class="emotion-dot" style="background: #00b894;">😤</div>
+          <div class="emotion-annotation" style="top: 36px;">Can't edit grouped elements</div>
+        </div>
+        <div class="emotion-point" style="left: 55%; top: 63%;">
+          <div class="emotion-dot" style="background: #e17055;">😩</div>
+          <div class="emotion-annotation" style="top: 36px;">Magic AI not helpful for science</div>
+        </div>
+        <div class="emotion-point" style="left: 68%; top: 52%;">
+          <div class="emotion-dot" style="background: #e17055;">😐</div>
+          <div class="emotion-annotation" style="top: 36px;">Classroom buried in menu</div>
+        </div>
+        <div class="emotion-point" style="left: 82%; top: 38%;">
+          <div class="emotion-dot" style="background: #fdcb6e;">😌</div>
+          <div class="emotion-annotation" style="top: 36px;">It's shared — done!</div>
+        </div>
+        <div class="emotion-point" style="left: 95%; top: 32%;">
+          <div class="emotion-dot" style="background: #fdcb6e;">🤔</div>
+          <div class="emotion-annotation" style="top: 36px;">Worth it? Maybe next time faster</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 3: ANALYSIS ==================== -->
+  <div class="section-divider">Section 3: Analysis</div>
+
+  <div class="analysis-section">
+    <h3>Opportunities & Insights</h3>
+    <div class="analysis-grid">
+      <div class="analysis-card card-strength">
+        <div class="card-tag">✓ What's Working</div>
+        SSO login and polished dashboard create a strong first impression. Templates are visually far superior to Google Slides defaults.
+        <div class="phase-tag">Stage: Get Started</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Search mixes all content types (presentations, posters, worksheets) together. 200+ results with no grade-level or subject filter creates decision fatigue.
+        <div class="phase-tag">Stage: Find a Template</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #8: Minimalist Design</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Grouped template elements prevent easy editing. Teacher expects to swap a diagram but can't access individual components without ungrouping — a hidden advanced action.
+        <div class="phase-tag">Stage: Customize</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #6: Recognition over Recall</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        "Magic Design" AI generates business/marketing content, not education-specific layouts. Mismatch between tool capability and teacher's context.
+        <div class="phase-tag">Stage: Customize</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #2: Match Real World</div>
+      </div>
+      <div class="analysis-card card-strength">
+        <div class="card-tag">✓ What's Working</div>
+        Final product quality exceeds what teacher could create in Google Slides. Visual appeal directly supports student engagement with science content.
+        <div class="phase-tag">Stage: Reflect</div>
+      </div>
+    </div>
+
+    <div class="analysis-grid" style="margin-top: 12px;">
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">💡 Opportunity</div>
+        Add an "Education" filter that organizes templates by grade band and subject area. Surface curriculum-aligned templates first for edu accounts.
+        <div class="phase-tag">Stage: Find a Template</div>
+      </div>
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">💡 Opportunity</div>
+        Train Magic Design AI on education use cases so it generates lesson-appropriate layouts rather than defaulting to business/marketing templates.
+        <div class="phase-tag">Stage: Customize</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Google Classroom integration hidden under "More" in share menu. For an education-specific product, LMS sharing should be a primary action, not buried.
+        <div class="phase-tag">Stage: Share</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #6: Recognition over Recall</div>
+      </div>
+      <div class="analysis-card card-question">
+        <div class="card-tag">? Open Questions</div>
+        Do teachers create a second presentation? What's the return rate? Does the time investment decrease significantly for repeat users?
+        <div class="phase-tag">Stage: Reflect</div>
+      </div>
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">$ Learning Impact</div>
+        If "Save as Template" was prompted after first creation, teacher's second deck could take 15 min instead of 50 — a 70% time savings that makes the tool sustainable.
+        <div class="phase-tag">Stage: Reflect</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <h3>Map Legend</h3>
+    <div class="legend-item"><div class="legend-swatch" style="background: #d4edda; border-left: 3px solid #00b894;"></div> What's Working</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #f8d7da; border-left: 3px solid #e17055;"></div> Friction Point</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #d1ecf1; border-left: 3px solid #0984e3;"></div> Opportunity</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #fff3cd; border-left: 3px solid #fdcb6e;"></div> Open Question</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #f0f0f0; border-left: 3px solid #e17055;"></div> Revised Assumptions</div>
+  </div>
+
+  <div class="map-footer">
+    <span>EDUC 590: UX Research in Education — Journey Map Example (Teacher-Facing Tool)</span>
+    <span>Product: Canva for Education | Date: Feb 2026 | Version: 1.0</span>
+  </div>
+
+</div>
+</body>
+</html>
