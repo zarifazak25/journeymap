@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Map Example: Epic! Reading — Parent Setting Up a Child's Reading Library</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f9fa;
+    color: #2d3436;
+    padding: 40px;
+  }
+
+  .journey-map {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: #1B4332;
+    color: white;
+    padding: 32px 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #95D5B2;
+  }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: #74b890;
+    margin-bottom: 16px;
+  }
+
+  .header .map-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .context-row {
+    display: flex;
+    gap: 24px;
+  }
+
+  .context-box {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .context-box h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #95D5B2;
+    margin-bottom: 8px;
+  }
+
+  .context-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #b8d8c5;
+  }
+
+  .personas-container {
+    display: flex;
+    gap: 20px;
+  }
+
+  .persona-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .persona-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .persona-info h4 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .persona-info p {
+    font-size: 12px;
+    color: #74b890;
+    line-height: 1.4;
+  }
+
+  .dual-persona-note {
+    font-size: 11px;
+    color: #95D5B2;
+    font-style: italic;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ===== GRAVEYARD ===== */
+  .graveyard {
+    background: #f0f0f0;
+    border-left: 4px solid #e17055;
+    margin: 0 40px;
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .graveyard h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #e17055;
+    margin-bottom: 8px;
+  }
+
+  .graveyard ul {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .graveyard li {
+    font-size: 12px;
+    color: #636e72;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: line-through;
+    border: 1px solid #dfe6e9;
+  }
+
+  .section-divider {
+    margin: 0 40px;
+    padding: 20px 0 8px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1B4332;
+    font-weight: 700;
+    border-top: 2px solid #1B4332;
+    margin-top: 24px;
+  }
+
+  /* ===== PHASES ===== */
+  .phases-bar {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    margin: 24px 40px 0;
+  }
+
+  .phase-label-header {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #636e72;
+    padding: 12px 0;
+    font-weight: 600;
+  }
+
+  .phase-item {
+    text-align: center;
+    padding: 10px 6px;
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .phase-sub {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.85;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .p1 { background: #6c5ce7; }
+  .p2 { background: #0984e3; }
+  .p3 { background: #00b894; }
+  .p4 { background: #fdcb6e; color: #2d3436; }
+  .p5 { background: #e17055; }
+  .p6 { background: #636e72; }
+
+  /* ===== GRID ===== */
+  .experience-grid { margin: 0 40px; }
+
+  .grid-row {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    border-bottom: 1px solid #eee;
+    min-height: 75px;
+  }
+
+  .row-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    padding: 14px 8px 14px 0;
+    display: flex;
+    align-items: flex-start;
+    border-right: 2px solid #dfe6e9;
+  }
+
+  .row-label .label-icon { margin-right: 8px; font-size: 16px; }
+
+  .cell {
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #2d3436;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .cell:last-child { border-right: none; }
+  .cell ul { list-style: none; padding: 0; }
+
+  .cell li {
+    margin-bottom: 5px;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .cell li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #b2bec3;
+  }
+
+  .actor-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-right: 3px;
+  }
+
+  .tag-parent { background: #dfe6e9; color: #636e72; }
+  .tag-child { background: #ffeaa7; color: #6d4c00; }
+  .tag-both { background: #dff9fb; color: #006266; }
+
+  .quote {
+    font-style: italic;
+    color: #6c5ce7;
+  }
+
+  .quote::before { content: '\201C'; }
+  .quote::after { content: '\201D'; }
+
+  .touchpoint-icons { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .touchpoint-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background: #dfe6e9;
+    position: relative;
+  }
+
+  .touchpoint-icon .tp-label {
+    position: absolute;
+    bottom: -15px;
+    font-size: 8px;
+    white-space: nowrap;
+    color: #636e72;
+  }
+
+  /* ===== EMOTION ===== */
+  .emotion-section {
+    margin: 0 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .emotion-legend-inline {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    color: #636e72;
+  }
+
+  .emotion-legend-inline span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .line-sample {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .emotion-curve-container {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+  }
+
+  .emotion-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 12px;
+    font-size: 10px;
+    color: #b2bec3;
+    height: 200px;
+    text-align: right;
+  }
+
+  .emotion-chart {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(to bottom,
+      rgba(0, 184, 148, 0.05) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(225, 112, 85, 0.05) 100%
+    );
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .emotion-chart svg { width: 100%; height: 100%; }
+
+  .midline {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed #dfe6e9;
+  }
+
+  .emotion-point {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .emotion-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .emotion-annotation {
+    position: absolute;
+    font-size: 9px;
+    color: #636e72;
+    font-style: italic;
+    max-width: 100px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* ===== ANALYSIS ===== */
+  .analysis-section { margin: 24px 40px; }
+
+  .analysis-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    margin-bottom: 16px;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  .analysis-card {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .card-strength { background: #d4edda; border-left: 3px solid #00b894; }
+  .card-pain { background: #f8d7da; border-left: 3px solid #e17055; }
+  .card-opportunity { background: #d1ecf1; border-left: 3px solid #0984e3; }
+  .card-question { background: #fff3cd; border-left: 3px solid #fdcb6e; }
+
+  .analysis-card .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .card-strength .card-tag { color: #00b894; }
+  .card-pain .card-tag { color: #e17055; }
+  .card-opportunity .card-tag { color: #0984e3; }
+  .card-question .card-tag { color: #d4a017; }
+
+  .phase-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.06);
+    color: #636e72;
+    margin-top: 6px;
+  }
+
+  .legend {
+    margin: 24px 40px 32px;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .legend h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #636e72;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #636e72;
+  }
+
+  .legend-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .map-footer {
+    background: #f8f9fa;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #b2bec3;
+    border-top: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+
+<div class="journey-map">
+
+  <!-- ===== SECTION 1: CONTEXT ===== -->
+  <div class="header">
+    <h1>Learner Journey Map</h1>
+    <div class="subtitle">EDUC 590 — UX Research in Education | Example: Parent/Child-Facing Tool</div>
+    <div class="map-title">Parent Setting Up and Monitoring a Child's Independent Reading on Epic!</div>
+
+    <div class="context-row">
+      <div class="context-box">
+        <h3>User Profiles (Dual Actors)</h3>
+        <div class="personas-container">
+          <div class="persona-card">
+            <div class="persona-avatar" style="background: #40916c;">👩</div>
+            <div class="persona-info">
+              <h4>Aisha (Parent)</h4>
+              <p>Mother of an 8-year-old<br>Moderate tech comfort<br>Wants to encourage nightly reading<br>Works evenings, needs child to read independently</p>
+            </div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-avatar" style="background: #ffeaa7;">👦</div>
+            <div class="persona-info">
+              <h4>Jayden (Child)</h4>
+              <p>3rd grader, age 8<br>Loves dinosaurs and comics<br>Reluctant reader with chapter books<br>Prefers tablet over physical books</p>
+            </div>
+          </div>
+        </div>
+        <div class="dual-persona-note">⚠️ This journey tracks two actors — the parent sets up and monitors, while the child discovers and reads. Their paths diverge after Stage 2.</div>
+      </div>
+      <div class="context-box">
+        <h3>Scenario</h3>
+        <p>Aisha signs up for Epic! to build Jayden's independent reading habit. She sets up his profile, curates initial book selections, then hands the tablet to Jayden to explore and read on his own. Aisha later checks the parent dashboard to see what Jayden read and for how long.</p>
+      </div>
+      <div class="context-box">
+        <h3>User Goals & Expectations</h3>
+        <p>
+          <strong style="color: #d8e4dc;">Aisha:</strong> Set up safely, curate age-appropriate content, track reading time and progress, build a nightly routine<br><br>
+          <strong style="color: #ffeaa7;">Jayden:</strong> Find fun books he actually wants to read, browse independently, not feel like "homework"
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="graveyard">
+    <h3>🪦 Revised Assumptions</h3>
+    <ul>
+      <li>Free version would include enough books to sustain interest</li>
+      <li>Reading level filter would match school's Lexile levels</li>
+      <li>Child could browse without encountering subscription upsells</li>
+      <li>Parent dashboard would show comprehension, not just minutes</li>
+    </ul>
+  </div>
+
+  <!-- ===== SECTION 2: THE EXPERIENCE ===== -->
+  <div class="section-divider">Section 2: The Experience</div>
+
+  <div class="phases-bar">
+    <div class="phase-label-header">Stages</div>
+    <div class="phase-item p1">Sign Up<span class="phase-sub">Create accounts</span></div>
+    <div class="phase-item p2">Set Up Profile<span class="phase-sub">Configure child</span></div>
+    <div class="phase-item p3">Curate<span class="phase-sub">Select initial books</span></div>
+    <div class="phase-item p4">Explore & Read<span class="phase-sub">Child's solo time</span></div>
+    <div class="phase-item p5">Monitor<span class="phase-sub">Parent checks progress</span></div>
+    <div class="phase-item p6">Sustain<span class="phase-sub">Build the habit</span></div>
+  </div>
+
+  <div class="experience-grid">
+
+    <!-- ACTIONS -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">🏃</span> Actions</div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> Downloads app on tablet</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Creates parent account with email</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Sees free trial vs. paid options</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Starts 30-day free trial</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> Creates child profile</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Enters age and grade</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Selects interest categories</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Sets daily reading timer (20 min)</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Reviews parental controls</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> Browses recommended books</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Searches "dinosaurs" for Jayden</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Adds books to "My Collection"</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Looks for reading level indicators</li>
+          <li><span class="actor-tag tag-both">Both</span> Parent shows Jayden the collection</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-child">Child</span> Opens app on tablet</li>
+          <li><span class="actor-tag tag-child">Child</span> Sees curated collection + recommendations</li>
+          <li><span class="actor-tag tag-child">Child</span> Taps on a dinosaur book cover</li>
+          <li><span class="actor-tag tag-child">Child</span> Reads for ~10 minutes</li>
+          <li><span class="actor-tag tag-child">Child</span> Switches to a comic-format book</li>
+          <li><span class="actor-tag tag-child">Child</span> Hits a "locked" book — subscription prompt</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> Opens parent dashboard next morning</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Sees "12 minutes read" and "2 books opened"</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Looks for comprehension data — not available</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Checks which books Jayden chose</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-child">Child</span> Returns to app next evening</li>
+          <li><span class="actor-tag tag-child">Child</span> Remembers dinosaur book and continues</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Sets a bedtime reading reminder</li>
+          <li><span class="actor-tag tag-parent">Parent</span> Evaluates whether to pay after trial ends</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- THOUGHTS -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">💭</span> Thoughts</div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">Another subscription? I'll try the free trial first</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">I hope this isn't just a glorified reading app with ads</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">Interest categories are good — he'll like seeing dinosaur books right away</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">Where's the Lexile level? His teacher uses that</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">The recommendations look great but I can't tell which are actually at his reading level vs. just in his interest area</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">I wish I could set it up so he only sees books at his level</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-child">Child</span> <span class="quote">Whoa, dinosaur books! This is cool!</span></li>
+          <li><span class="actor-tag tag-child">Child</span> <span class="quote">This chapter book has too many words on the page</span></li>
+          <li><span class="actor-tag tag-child">Child</span> <span class="quote">I want this one! Why does it say I can't read it?</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">12 minutes? He was on it for 20 — was some of that just browsing?</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">I see time but not whether he understood what he read</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <ul>
+          <li><span class="actor-tag tag-child">Child</span> <span class="quote">Where's my dinosaur book? I want to keep reading</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">He asked to read again without me prompting — that's huge</span></li>
+          <li><span class="actor-tag tag-parent">Parent</span> <span class="quote">Is $10/month worth it? He has free books at the library</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TOUCHPOINTS -->
+    <div class="grid-row">
+      <div class="row-label"><span class="label-icon">📱</span> Touchpoints</div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">📱<span class="tp-label">App Store</span></div>
+          <div class="touchpoint-icon">📧<span class="tp-label">Email</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">👤<span class="tp-label">Profile</span></div>
+          <div class="touchpoint-icon">⚙️<span class="tp-label">Settings</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">🔍<span class="tp-label">Search</span></div>
+          <div class="touchpoint-icon">📚<span class="tp-label">Collection</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">📖<span class="tp-label">Reader</span></div>
+          <div class="touchpoint-icon">🏠<span class="tp-label">Browse</span></div>
+          <div class="touchpoint-icon">🔒<span class="tp-label">Paywall</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">📊<span class="tp-label">Dashboard</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="touchpoint-icons">
+          <div class="touchpoint-icon">🔔<span class="tp-label">Reminder</span></div>
+          <div class="touchpoint-icon">📖<span class="tp-label">Reader</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMOTION CURVE -->
+  <div class="emotion-section">
+    <div class="emotion-legend-inline">
+      <span><span class="line-sample" style="background: #636e72;"></span> Parent emotion</span>
+      <span><span class="line-sample" style="background: #95D5B2;"></span> Child emotion</span>
+    </div>
+    <div class="emotion-curve-container">
+      <div class="emotion-y-axis">
+        <span>😊 Positive</span>
+        <span>😐 Neutral</span>
+        <span>😟 Negative</span>
+      </div>
+      <div class="emotion-chart">
+        <div class="midline"></div>
+        <svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+          <!-- Parent curve (gray dashed) -->
+          <path d="M 30,85 C 80,80 130,70 200,65 C 270,68 330,72 400,68 C 470,80 530,85 600,90 C 670,95 730,110 800,100 C 870,90 930,85 970,80"
+                fill="none" stroke="#636e72" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8,4" />
+          <!-- Child curve (green solid) -->
+          <path d="M 30,100 C 80,100 130,100 200,100 C 270,100 330,95 400,70 C 470,30 530,25 600,35 C 650,60 680,80 720,110 C 770,90 830,50 870,35 C 930,30 960,28 970,30"
+                fill="none" stroke="#95D5B2" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+
+        <!-- Emotion points -->
+        <div class="emotion-point" style="left: 8%; top: 42%;">
+          <div class="emotion-dot" style="background: #dfe6e9;">😐</div>
+          <div class="emotion-annotation" style="top: 34px;">Another subscription...</div>
+        </div>
+        <div class="emotion-point" style="left: 20%; top: 32%;">
+          <div class="emotion-dot" style="background: #dfe6e9;">😊</div>
+          <div class="emotion-annotation" style="top: 34px;">Interest setup is nice</div>
+        </div>
+        <div class="emotion-point" style="left: 38%; top: 35%;">
+          <div class="emotion-dot" style="background: #dfe6e9;">😐</div>
+          <div class="emotion-annotation" style="top: -22px;">No Lexile match</div>
+        </div>
+        <div class="emotion-point" style="left: 48%; top: 15%;">
+          <div class="emotion-dot" style="background: #ffeaa7;">😆</div>
+          <div class="emotion-annotation" style="top: 34px;">Dinosaurs!!</div>
+        </div>
+        <div class="emotion-point" style="left: 60%; top: 18%;">
+          <div class="emotion-dot" style="background: #ffeaa7;">😊</div>
+          <div class="emotion-annotation" style="top: 34px;">Loves the comics</div>
+        </div>
+        <div class="emotion-point" style="left: 70%; top: 55%;">
+          <div class="emotion-dot" style="background: #ffeaa7;">😤</div>
+          <div class="emotion-annotation" style="top: 34px;">Book is locked!</div>
+        </div>
+        <div class="emotion-point" style="left: 82%; top: 50%;">
+          <div class="emotion-dot" style="background: #dfe6e9;">😐</div>
+          <div class="emotion-annotation" style="top: 34px;">Minutes but no insight</div>
+        </div>
+        <div class="emotion-point" style="left: 93%; top: 15%;">
+          <div class="emotion-dot" style="background: #ffeaa7;">😊</div>
+          <div class="emotion-annotation" style="top: 34px;">Wants to read again!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: ANALYSIS ===== -->
+  <div class="section-divider">Section 3: Analysis</div>
+
+  <div class="analysis-section">
+    <h3>Opportunities & Insights</h3>
+    <div class="analysis-grid">
+      <div class="analysis-card card-strength">
+        <div class="card-tag">✓ What's Working</div>
+        Interest-based profile setup creates immediate engagement. Jayden sees dinosaur books right away — personalization drives first session success.
+        <div class="phase-tag">Stage: Set Up, Explore</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Reading level system uses proprietary scale instead of school-standard Lexile or Guided Reading levels. Parent can't easily match to teacher's recommendations.
+        <div class="phase-tag">Stage: Curate</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #2: Match Real World</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Child encounters locked books mid-browse with no warning. The subscription upsell interrupts flow and creates frustration during an otherwise positive experience.
+        <div class="phase-tag">Stage: Explore & Read</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #3: User Control</div>
+      </div>
+      <div class="analysis-card card-strength">
+        <div class="card-tag">✓ What's Working</div>
+        Comic-format books engage a reluctant reader. Multiple format options (comics, illustrated, chapter books) mean something appeals to every reader type.
+        <div class="phase-tag">Stage: Explore & Read</div>
+        <div class="phase-tag" style="margin-left: 4px;">UDL: Multiple Means of Engagement</div>
+      </div>
+      <div class="analysis-card card-pain">
+        <div class="card-tag">! Friction Point</div>
+        Parent dashboard shows time-on-app but reading time doesn't match tablet time. No comprehension indicators — parent can't assess actual learning.
+        <div class="phase-tag">Stage: Monitor</div>
+        <div class="phase-tag" style="margin-left: 4px;">Heuristic #1: Visibility</div>
+      </div>
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">💡 Opportunity</div>
+        Add Lexile/Guided Reading level mapping so parents can filter by school-standard levels. Include a "teacher recommended" badge for books commonly assigned.
+        <div class="phase-tag">Stage: Curate</div>
+      </div>
+    </div>
+
+    <div class="analysis-grid" style="margin-top: 10px;">
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">💡 Opportunity</div>
+        Hide locked books from child's browse view during trial, or clearly mark them before the child taps. Prevent interruption of reading flow with upsell modals.
+        <div class="phase-tag">Stage: Explore & Read</div>
+      </div>
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">💡 Opportunity</div>
+        Add simple post-reading questions ("What was your favorite part?") and show results in parent dashboard alongside time. Bridge the comprehension data gap.
+        <div class="phase-tag">Stage: Monitor</div>
+      </div>
+      <div class="analysis-card card-question">
+        <div class="card-tag">? Open Questions</div>
+        Does the child return to books they started, or start new ones each time? How does format preference (comic vs. chapter) correlate with reading duration?
+        <div class="phase-tag">Stage: Explore, Sustain</div>
+      </div>
+      <div class="analysis-card card-question">
+        <div class="card-tag">? Open Questions</div>
+        What percentage of trial users convert to paid? What's the top reason parents cancel — price, content quality, or lack of progress data?
+        <div class="phase-tag">Stage: Sustain</div>
+      </div>
+      <div class="analysis-card card-strength">
+        <div class="card-tag">✓ What's Working</div>
+        Child-initiated return is the strongest signal. Jayden asked to read again unprompted — the product is building intrinsic motivation.
+        <div class="phase-tag">Stage: Sustain</div>
+      </div>
+      <div class="analysis-card card-opportunity">
+        <div class="card-tag">$ Learning Impact</div>
+        If reading habit sustains, child moves from 0 voluntary reading sessions/week to 5+. This aligns with research showing 20 min/day of independent reading improves fluency significantly.
+        <div class="phase-tag">Stage: Sustain</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>Map Legend</h3>
+    <div class="legend-item"><div class="legend-swatch" style="background: #d4edda; border-left: 3px solid #00b894;"></div> What's Working</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #f8d7da; border-left: 3px solid #e17055;"></div> Friction Point</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #d1ecf1; border-left: 3px solid #0984e3;"></div> Opportunity</div>
+    <div class="legend-item"><div class="legend-swatch" style="background: #fff3cd; border-left: 3px solid #fdcb6e;"></div> Open Question</div>
+    <div class="legend-item"><span class="actor-tag tag-parent" style="font-size: 11px;">Parent</span> Parent action</div>
+    <div class="legend-item"><span class="actor-tag tag-child" style="font-size: 11px;">Child</span> Child action</div>
+    <div class="legend-item"><span class="actor-tag tag-both" style="font-size: 11px;">Both</span> Joint action</div>
+  </div>
+
+  <div class="map-footer">
+    <span>EDUC 590: UX Research in Education — Journey Map Example (Parent/Child-Facing Tool)</span>
+    <span>Product: Epic! Reading | Date: Feb 2026 | Version: 1.0</span>
+  </div>
+
+</div>
+</body>
+</html>
